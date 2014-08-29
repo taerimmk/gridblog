@@ -1,0 +1,47 @@
+create database jpa;
+
+USE jpa;
+
+CREATE TABLE BBS (
+  ID middleint not null auto_increment primary key,
+  BBS_ID char(20) NOT NULL,
+  NTT_NO decimal(20,0) DEFAULT NULL,
+  NTT_SJ varchar(2000) DEFAULT NULL,
+  NTT_CN mediumtext,
+  NTT_LK varchar(2000) DEFAULT NULL,
+  ANSWER_AT char(1) DEFAULT NULL,
+  PARNTSCTT_NO decimal(10,0) DEFAULT NULL,
+  ANSWER_LC int(11) DEFAULT NULL,
+  SORT_ORDR decimal(8,0) DEFAULT NULL,
+  RDCNT decimal(10,0) DEFAULT NULL,
+  USE_AT char(1) NOT NULL,
+  NTCR_ID varchar(20) DEFAULT NULL,
+  NTCR_NM varchar(20) DEFAULT NULL,
+  PASSWORD varchar(200) DEFAULT NULL,
+  ATCH_FILE_ID middleint DEFAULT NULL,
+  REGI_DATE datetime NOT NULL,
+  REGI_ID middleint NOT NULL,
+  UPDT_DATE datetime DEFAULT NULL,
+  UPDT_ID middleint DEFAULT NULL
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE BBSMASTER (
+  ID middleint not null auto_increment primary key,
+  BBS_NM varchar(255) NOT NULL,
+  BBS_INTRCN varchar(2400) DEFAULT NULL,
+  BBS_TY_CODE char(6) NOT NULL,
+  BBS_ATTRB_CODE char(6) NOT NULL,
+  REPLY_POSBL_AT char(1) DEFAULT NULL,
+  FILE_ATCH_POSBL_AT char(1) NOT NULL,
+  ATCH_POSBL_FILE_NUMBER decimal(2,0) NOT NULL,
+  ATCH_POSBL_FILE_SIZE decimal(8,0) DEFAULT NULL,
+  USE_AT char(1) NOT NULL,
+  TMPLAT_ID char(20) DEFAULT NULL,
+  REGI_DATE datetime NOT NULL,
+  REGI_ID middleint NOT NULL,
+  UPDT_DATE datetime DEFAULT NULL,
+  UPDT_ID middleint DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
