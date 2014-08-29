@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "USER_ROLE")
 public class UserRoleInfo {
@@ -23,14 +25,20 @@ public class UserRoleInfo {
 
 	@Column(name = "REGI_DATE", updatable = false)
 	private Date regiDate;
-	
+
+	@Column(name = "USER")
+	private Integer user;
+
+	@Column(name = "ROLE")
+	private Integer role;
+
 	@ManyToOne
-    @JoinColumn(name = "ROLE")
-    private RoleInfo roleInfo;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "USER")
-    private UserInfo userInfo;
+	@JoinColumn(name = "ROLE", insertable = false, updatable = false)
+	private RoleInfo roleInfo;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER", insertable = false, updatable = false)
+	private UserInfo userInfo;
 
 	public Integer getId() {
 		return id;
@@ -40,7 +48,6 @@ public class UserRoleInfo {
 		this.id = id;
 	}
 
-
 	public Date getRegiDate() {
 		return regiDate;
 	}
@@ -49,6 +56,23 @@ public class UserRoleInfo {
 		this.regiDate = regiDate;
 	}
 
+	public Integer getUser() {
+		return user;
+	}
+
+	public void setUser(Integer user) {
+		this.user = user;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	@JsonIgnore
 	public RoleInfo getRoleInfo() {
 		return roleInfo;
 	}
@@ -57,11 +81,19 @@ public class UserRoleInfo {
 		this.roleInfo = roleInfo;
 	}
 
-	@Override
-	public String toString() {
-		return "UserRoleInfo [id=" + id + ", regiDate=" + regiDate
-				+ ", roleInfo=" + roleInfo + "]";
+	@JsonIgnore
+	public UserInfo getUserInfo() {
+		return userInfo;
 	}
 
-	
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "UserRoleInfo [id=" + id + ", regiDate=" + regiDate + ", user="
+				+ user + ", role=" + role + "]";
+	}
+
 }

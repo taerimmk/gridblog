@@ -6,13 +6,17 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http pattern="/login" security="none" />
+	<http pattern="/main" security="none" />
+	<http pattern="/register/**" security="none" />
 	<http pattern="/resources/**" security="none" />
 
-	<http>
+	<http auto-config="true">
 		<intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_ADMIN" />
-		<form-login login-page="/login" default-target-url="/main" 
-			authentication-failure-url="/login?fail=1" always-use-default-target="false" />
+		<form-login login-page="/login" default-target-url="/main"
+			authentication-failure-url="/login?fail=1" always-use-default-target="false"
+			authentication-success-handler-ref="loginSuccessHandler" 
+			/>
 
 		<logout logout-success-url="/login" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
@@ -31,5 +35,5 @@
 		</authentication-provider>
 	</authentication-manager>
 	<!-- $2a$10$n0fYvdchqL3G0SymPIOvpewH5dCgzFz6Xq47TSOK/GUr76INR0sne -->
-	
+
 </beans:beans>

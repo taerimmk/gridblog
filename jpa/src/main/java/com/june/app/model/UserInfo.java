@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,9 +43,15 @@ public class UserInfo {
 
 	@Column(name = "PASSWORD")
 	private String password;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInfo",fetch =FetchType.LAZY)
-    private List<UserRoleInfo> userRoleInfos;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userInfo", fetch = FetchType.LAZY)
+	private List<UserRoleInfo> userRoleInfos;
+
+	@Column(name = "ATCH_FILE_ID")
+	private String atchFileId;
+
+	@Transient
+	private MultipartFile atchFileIdFile;
 
 	public Integer getId() {
 		return id;
@@ -84,6 +92,7 @@ public class UserInfo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	@JsonIgnore
 	public String getPassword() {
 		return password;
@@ -101,13 +110,5 @@ public class UserInfo {
 		this.userRoleInfos = userRoleInfos;
 	}
 
-	@Override
-	public String toString() {
-		return "UserInfo [id=" + id + ", userId=" + userId + ", name=" + name
-				+ ", email=" + email + ", status=" + status + ", password="
-				+ password + "]";
-	}
 
-	
-	
 }

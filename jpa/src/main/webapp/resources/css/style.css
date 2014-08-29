@@ -3680,6 +3680,33 @@ html {
 .cmnbtn:focus {
 }
 
+.cmnbtn_side {
+	float:left;
+	position:relative;
+	border-radius:3px;
+	line-height:22px;
+	width:auto;
+	background-color:#efefef;
+	color:#757575;
+	padding:4px 24px;
+	font-size:12px;
+	-webkit-transition:all .2s ease-out;
+	-moz-transition:all .2s ease-out;
+	-o-transition:all .2s ease-out;
+	transition:all .2s ease-out;
+	border:0 solid rgba(0,0,0,0.15);
+	outline:none;
+	border-bottom:2px solid #dfdfdf;
+}
+
+.cmnbtn_side:hover {
+	color:#757575;
+	background-color:#e8e8e8;
+	text-decoration:none;
+	cursor:pointer;
+}
+.cmnbtn_side:focus {
+}
 
 input.email,input.url,input.author,input.textbar {
 	float:left;

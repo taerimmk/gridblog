@@ -13,7 +13,7 @@
 
 	<!-- import the dataSource definition -->
 	<import resource="datasource-config.xml" />
-	
+
 	<context:component-scan base-package="com.june.app.service" />
 
 	<!-- Configurer that replaces ${...} placeholders with values from a properties 
@@ -43,7 +43,7 @@
 		</property>
 		<!-- gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, 
 			persistenceUnit will win -->
-		<property name="persistenceUnitName" value="june"/>
+		<property name="persistenceUnitName" value="june" />
 		<property name="packagesToScan" value="com.june.app" />
 	</bean>
 
@@ -58,12 +58,21 @@
 		hierarchy). -->
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- spring security auth service -->
 	<bean id="authService" class="com.june.app.service.impl.AuthServiceImpl" />
 
 	<!-- Loads JPA beans Will automatically be transactional due to @Transactional. 
 		EntityManager will be auto-injected due to @PersistenceContext. PersistenceExceptions 
 		will be auto-translated due to @Repository. -->
 	<context:component-scan base-package="com.june.app.repository.jpa" />
+	
+	<!-- <bean id="loginSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"> -->
+	<bean id="loginSuccessHandler" class="com.june.app.service.impl.LoginSuccessHandlerImpl">
+		<!-- <property name="alwaysUseDefaultTargetUrl" value="false" /> -->
+		<property name="useReferer" value="true"/>
+		<!-- <property name="defaultTargetUrl" value="/main" /> -->
+	</bean>
 
 
 </beans>

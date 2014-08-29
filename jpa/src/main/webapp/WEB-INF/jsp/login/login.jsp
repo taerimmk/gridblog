@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Basic Page Needs -->
-<title>Board Save</title>
+<title>My Account | Login</title>
 <jsp:include page="../inc/headerTag.jsp" />
 <body class="single single-post postid-224 single-format-standard">
 	<jsp:include page="../inc/headerMobile.jsp" />
@@ -100,12 +100,12 @@
 												<input name="submit" type="submit" id="goPut" class="cmnbtn"
 													value="들어가기" />
 											</p>
-											<p class="form-submit">
+											<p class="form-submit" style="margin-right: 3px;">
 												<a href="/"><input class="cmnbtn" value="취소"
 													type="button" /></a>
 											</p>
 											<p class="form-submit">
-												<a href="/"><input class="cmnbtn" value="회원가입"
+												<a href="/register/registerUser"><input class="cmnbtn" value="회원가입"
 													type="button" /></a>
 											</p>
 										</form>

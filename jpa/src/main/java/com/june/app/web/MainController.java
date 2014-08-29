@@ -13,7 +13,7 @@ public class MainController extends CommonController {
 	/**
 	 * 메인 페이지
 	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = {"/main","/"}, method = RequestMethod.GET)
 	public String boardList(Locale locale, Map<String, Object> model) {
 
 		return "main/main";
