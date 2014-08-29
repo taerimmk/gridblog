@@ -17,17 +17,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.util.StringUtils;
 
 import com.june.app.model.Login;
 import com.june.app.model.UserInfo;
 import com.june.app.repository.UserRepository;
 
 
-public class LoginSuccessHandlerImpl  extends AbstractAuthenticationTargetUrlRequestHandler implements AuthenticationSuccessHandler
+public class LoginSuccessHandlerImpl  extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
 	 
 	private static final Logger logger = LoggerFactory.getLogger(LoginSuccessHandlerImpl.class);
+	private RequestCache requestCache = new HttpSessionRequestCache();
 	
 	@Autowired
     UserRepository userRepository;
@@ -38,6 +43,7 @@ public class LoginSuccessHandlerImpl  extends AbstractAuthenticationTargetUrlReq
         setDefaultTargetUrl(defaultTargetUrl);
     }
 	
+	@Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
     {
     	
@@ -60,13 +66,35 @@ public class LoginSuccessHandlerImpl  extends AbstractAuthenticationTargetUrlReq
     	 request.getSession().setAttribute("loginInfo", login);
      }
      //HttpSessionRequestCache
-     
+   /*  
      SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
      String targetUrl = savedRequest.getRedirectUrl();
      //handle(request, response, authentication);
      getRedirectStrategy().sendRedirect(request, response, targetUrl);
      clearAuthenticationAttributesCus(request);
+     */
      
+     SavedRequest savedRequest = requestCache.getRequest(request, response);
+
+     if (savedRequest == null) {
+         super.onAuthenticationSuccess(request, response, authentication);
+
+         return;
+     }
+     String targetUrlParameter = getTargetUrlParameter();
+     if (isAlwaysUseDefaultTargetUrl() || (targetUrlParameter != null && StringUtils.hasText(request.getParameter(targetUrlParameter)))) {
+         requestCache.removeRequest(request, response);
+         super.onAuthenticationSuccess(request, response, authentication);
+
+         return;
+     }
+
+     clearAuthenticationAttributes(request);
+
+     // Use the DefaultSavedRequest URL
+     String targetUrl = savedRequest.getRedirectUrl();
+     logger.debug("Redirecting to DefaultSavedRequest Url: " + targetUrl);
+     getRedirectStrategy().sendRedirect(request, response, targetUrl);
      
      //getRedirectStrategy().sendRedirect(request, response, "");
      //.sendRedirect(request, response, url);
