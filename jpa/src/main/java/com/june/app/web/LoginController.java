@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.june.app.model.Login;
 
 @Controller
-public class LoginController {
+public class LoginController extends CommonController{
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(LoginController.class);
 
 	@RequestMapping(value = "/user/welcome", method = RequestMethod.GET)
 	public String printWelcomeUser() {
