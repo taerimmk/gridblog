@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -37,10 +38,9 @@
 											class="post-19 post type-post status-publish format-gallery has-post-thumbnail hentry category-photography category-post-formats tag-blonde tag-gallery-format tag-models tag-photos">
 											<div class="singlewrap">
 												<div class='entry-thumbnail nivoSlider'>
-													<img
-														src='http://aonethemes.com/infinitygrid/wp-content/uploads/sites/10/2014/01/megamodel.png' /><img
-														src='http://aonethemes.com/infinitygrid/wp-content/uploads/sites/10/2014/01/woman_in_sunset-wallpaper-1600x900.jpg' /><img
-														src='http://aonethemes.com/infinitygrid/wp-content/uploads/sites/10/2014/01/gorgeousfemale.jpg' />
+													<img src='/resources/img/main/main_01.jpg' /><img
+														src='/resources/img/main/main_02.jpg' /><img
+														src='/resources/img/main/main_03.jpg' />
 												</div>
 											</div>
 										</div>
@@ -51,7 +51,7 @@
 							</div>
 							<div id="mainmasonry">
 
-								<div class="col-xs-12 col-sm-6 col-md-4 bump" id="masonryme">
+								<!-- <div class="col-xs-12 col-sm-6 col-md-4 bump" id="masonryme">
 
 									<div class="colored nopbump rel">
 										<div
@@ -77,12 +77,12 @@
 										</h3>
 
 										<div class="post-text-grip topbtmbumpmin">
-											<!-- <p>
+											<p>
 												Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 												Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
 												natoque penatibus et magnis dis <a class="read-more"
 													href="http://aonethemes.com/infinitygrid/a-puppy-post/">[...]</a>
-											</p> -->
+											</p>
 										</div>
 
 										<div class="post-text-grip linetop-pads">
@@ -97,22 +97,14 @@
 											</div>
 										</div>
 									</div>
-									<!--colored-->
-								</div>
+									colored
+								</div> -->
 								<!--four col-->
-								<div class="col-xs-12 col-sm-6 col-md-4 bump" id="masonryme">
+								<!-- <div class="col-xs-12 col-sm-6 col-md-4 bump" id="masonryme">
 
 									<div class="colored nopbump rel">
 										<div
 											class="post-77 post type-post status-publish format-quote hentry category-post-formats category-quotes tag-famous-quotes tag-quote"></div>
-
-
-
-
-
-
-
-
 										<div class="singlecp quotelight">
 											<a
 												href="http://aonethemes.com/infinitygrid/a-quote-from-oscar/">
@@ -121,17 +113,9 @@
 												<p>Oscar Wilde</p>
 											</a>
 										</div>
-
-
-
-
-
-
-
-
 									</div>
-									<!--colored-->
-								</div>
+									colored
+								</div> -->
 								<!--four col-->
 								<div class="col-xs-12 col-sm-6 col-md-4 bump" id="masonryme">
 
@@ -139,42 +123,29 @@
 										<div
 											class="post-31 post type-post status-publish format-video hentry category-post-formats category-video-clips tag-video-format tag-vimeo"></div>
 										<div class="fit-vids bumpsm">
-											<iframe width="640" height="360"
-												src="//www.youtube.com/embed/xe4pkKuesvQ" frameborder="0"
-												allowfullscreen></iframe>
+											<c:if test="${not empty board.nttLk }">
+												<div class="fit-vids bumpsm">${board.nttLk}</div>
+											</c:if>
 										</div>
 
 										<div class="post-text-grip accent">
-											<a
-												href="http://aonethemes.com/infinitygrid/category/post-formats/"
-												title="View all posts in Post formats" rel="category tag">Post
-												formats</a>, <a
-												href="http://aonethemes.com/infinitygrid/category/video-clips/"
-												title="View all posts in Video clips" rel="category tag">Video
-												clips</a>
+											<a href="#" title="View all posts in Post formats"
+																	rel="category tag">${board.userInfoReg.name}</a>, <a
+																	href="#" title="View all posts in Video clips"
+																	rel="category tag">${board.userInfoUpt.name}</a>
 										</div>
 
 										<h3 class="fully">
-											<a
-												href="http://aonethemes.com/infinitygrid/vimeo-video-post/">Vimeo
-												video post</a>
+											<a href="/bbs/${board.bbsId}/${board.id}">${board.nttSj}</a>
 										</h3>
 
-										<div class="post-text-grip topbtmbumpmin">
-											<p>
-												&#8216;We had the best of educations—in fact, we went to
-												school every day—&#8217; &#8216;I&#8217;VE been to a
-												day-school, too,&#8217; said Alice; &#8216;you <a
-													class="read-more"
-													href="http://aonethemes.com/infinitygrid/vimeo-video-post/">[...]</a>
-											</p>
-										</div>
+										<div class="post-text-grip topbtmbumpmin"></div>
 
 										<div class="post-text-grip linetop-pads">
 											<div class="infodiv accent pull-left bumpright">
-
-
-												January 20, 2014</div>
+												<joda:format value="${board.regiDate}"
+													pattern="yyyy년 MMM d일" locale="ko-KR" />
+											</div>
 
 											<div class="infodiv chatimg pull-right">0</div>
 
@@ -188,16 +159,15 @@
 								<!--four col-->
 							</div>
 							<!--end masonry grid-->
-							<div class="col-md-4 col-md-offset-4">
+							<!-- <div class="col-md-4 col-md-offset-4">
 								<div class="pagination-load-more">
 									<div class="pagination-me centertext">
-										<a href="#">Load
-											more</a>
+										<a href="#">Load more</a>
 									</div>
 
 									<span class="pagination-span-load"></span>
 								</div>
-							</div>
+							</div> -->
 							<!--span12-->
 						</div>
 					</div>

@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 <!DOCTYPE html>
+
 <html lang="en-US">
 <head>
 
@@ -16,9 +17,7 @@
 
 <!-- Basic Page Needs -->
 <title>Board</title>
-
 <jsp:include page="../inc/headerTag.jsp" />
-</head>
 <body class="archive tax-post_format term-post-format-video term-23">
 
 	<jsp:include page="../inc/headerMobile.jsp" />
@@ -27,6 +26,7 @@
 		<div class="site-margin">
 			<div class="site-wrap-shadow">
 				<jsp:include page="../inc/header.jsp" />
+
 				<!--slider for pages area-->
 				<section class="section-wrap">
 					<div class="container">
@@ -54,6 +54,7 @@
 					</div>
 				</section>
 				<!--end container-->
+
 				<!--section-->
 
 				<section class="section-wrap nopads">
@@ -66,16 +67,16 @@
 					</div>
 				</section>
 
+
 				<section class="section-wrap">
 					<div class="container">
 						<div class="row">
 
-
 							<div class="col-md-9">
 								<div class="row">
+									<c:if test="${not empty bbsList }">
+										<div id="mainmasonry">
 
-									<div id="mainmasonry">
-										<c:if test="${not empty bbsList }">
 											<c:forEach items="${bbsList}" var="rData">
 												<c:choose>
 													<c:when test="${'quote' eq rData.nttTy}">
@@ -97,26 +98,22 @@
 															<!--colored-->
 														</div>
 													</c:when>
+
 													<c:otherwise>
 														<div class="col-xs-12 col-sm-6 col-md-4 bump max-cap"
-															id="masonryme">
+															id="">
 															<div class="colored nopbump">
-
-																<div class="fit-vids bumpsm">
-																	<c:if test="${not empty rData.nttLk }">
-																		<div class="fit-vids bumpsm">${rData.nttLk}</div>
-																	</c:if>
-																</div>
-
+																<c:if test="${not empty rData.nttLk }">
+																	<div class="fit-vids bumpsm">${rData.nttLk}</div>
+																</c:if>
 																<div class="post-text-grip accent">
 																	<a href="#" title="View all posts in Post formats"
 																		rel="category tag">${rData.userInfoReg.name}</a>, <a
 																		href="#" title="View all posts in Video clips"
 																		rel="category tag">${rData.userInfoUpt.name}</a>
 																</div>
-
 																<h3 class="fully">
-																	<a href="/bbs/${rData.bbsId}/${rData.id}">${rData.nttSj}</a>
+																	<a href="/bbs/${rData.id}">${rData.nttSj}</a>
 																</h3>
 
 																<div class="post-text-grip topbtmbumpmin"></div>
@@ -126,32 +123,45 @@
 																		<joda:format value="${rData.regiDate}"
 																			pattern="yyyy년 MMM d일" locale="ko-KR" />
 																	</div>
-
 																	<div class="infodiv chatimg pull-right">0</div>
 
 																	<div class="infodiv countimg pull-right">
-																		<span class="heartcount">15</span>
+																		<span class="heartcount">13</span>
 																	</div>
 																</div>
-
 															</div>
 															<!--colored-->
 														</div>
+														<!--four col-->
 													</c:otherwise>
 												</c:choose>
-												<!--four col-->
+
 											</c:forEach>
-										</c:if>
-										<c:if test="${empty bbsList }">
+										</div>
+										<!--end masonry-->
+
+										<div class="col-md-4 col-md-offset-4">
+											<div class="pagination"></div>
+										</div>
+										<%-- <div class="col-md-4 col-md-offset-4">
+											<div class="pagination-load-more">
+												<div class="pagination-me centertext">
+													<a href="/bbs/${bbsMst.id}/new">포스트 등록</a>
+												</div>
+												<span class="pagination-span-load"></span>
+											</div>
+										</div> --%>
+										<!--span12-->
+									</c:if>
+									<c:if test="${empty bbsList }">
+										<div id="mainmasonry">
 											<div class="col-xs-12 col-sm-12 col-md-12 bump" id="">
 												<div class="colored nopbump">데이터가 없습니다.</div>
 											</div>
 											<!--four col-->
-										</c:if>
-
-									</div>
-									<!--end masonry-->
-
+										</div>
+									</c:if>
+									<!--end row-->
 									<div class="col-md-4 col-md-offset-4">
 										<div class="pagination-load-more">
 											<div class="pagination-me centertext">
@@ -160,39 +170,32 @@
 											<span class="pagination-span-load"></span>
 										</div>
 									</div>
-									<div class="col-md-4 col-md-offset-4" style="float: left;">
-										<div class="paginationArea"></div>
-									</div>
-
 								</div>
-								<!--end row-->
+
 							</div>
 							<!--end new row with 9 col-->
+
 							<jsp:include page="../inc/side.jsp" />
 
 						</div>
 						<!--end row-->
 					</div>
 					<!--end container-->
-
 				</section>
-
-				<!--span12-->
-
-				<jsp:include page="../inc/footer.jsp" />
 				<!--colored section footer-->
-
+				<jsp:include page="../inc/footer.jsp" />
 			</div>
 			<!--shadow-->
 		</div>
 		<!--margin-->
 	</div>
 	<!--end entiresite wrap-->
+
 	<jsp:include page="../inc/footerTag.jsp" />
 	<script type="text/javascript">
 		$(function() {
 			var bbsId = '${bbsMst.id}';
-			$('.paginationArea').bootpag({
+			$('.pagination').bootpag({
 				total : '${board.totalPageUnit}',
 				page : '${board.pageIndex}',
 				maxVisible : 5,

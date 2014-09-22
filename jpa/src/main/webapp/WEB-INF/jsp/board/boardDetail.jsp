@@ -146,7 +146,7 @@
 										<div class="row">
 
 											<div class="col-xs-6 text-left">
-												&larr; <a href="/bbs/${board.bbsId}/list" rel="prev">목록으로</a>
+												&larr; <a href="/bbs/${board.bbsId}/list/${board.pageIndex}" rel="prev">목록으로</a>
 											</div>
 
 											<div class="col-xs-6 text-right">

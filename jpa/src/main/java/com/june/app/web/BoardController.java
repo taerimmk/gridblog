@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,8 @@ public class BoardController extends CommonController {
 	@RequestMapping(value = "/bbs/{bbsId}/list/{pageIndex}", method = RequestMethod.GET)
 	public String boardList(Board board, Locale locale,
 			@PathVariable int bbsId, @PathVariable int pageIndex,
-			BindingResult result, Map<String, Object> model, HttpServletRequest request) {
+			BindingResult result, Map<String, Object> model,
+			HttpServletRequest request) {
 
 		Login logininfo = (Login) request.getSession()
 				.getAttribute("loginInfo");
@@ -87,14 +89,21 @@ public class BoardController extends CommonController {
 	 */
 	@RequestMapping(value = "/bbs/{bbsId}/new", method = RequestMethod.POST)
 	public String insertProc(Locale locale, @PathVariable int bbsId,
-			@Valid Board board, BindingResult result, SessionStatus status) {
+			@Valid Board board, BindingResult result, SessionStatus status,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "board/createOrUpdateBoardForm";
 		} else {
+			Login logininfo = (Login) request.getSession().getAttribute(
+					"loginInfo");
+			int userId = 1;
+			if (!StringUtils.isEmpty(logininfo)) {
+				userId = logininfo.getUserInfo().getId();
+			}
 			board.setBbsId(bbsId);
 			board.setUseAt("Y");
-			board.setRegiId(1);
-			board.setUpdtId(2);
+			board.setRegiId(userId);
+			board.setUpdtId(userId);
 			this.boardService.saveBoard(board);
 			status.setComplete();
 			return "redirect:/bbs/" + board.getId();
@@ -105,11 +114,46 @@ public class BoardController extends CommonController {
 	/**
 	 * 게시물 상세
 	 */
-	@RequestMapping("/bbs/{id}")
+	@RequestMapping(value = "/bbs/{bbsId}/{id}")
 	public ModelAndView showBoard(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("board/boardDetail");
 		mav.addObject(this.boardService.findBoardById(id));
 		return mav;
+	}
+
+	/**
+	 * 게시물 수정
+	 */
+	@RequestMapping(value = "/bbs/*/{id}/edit", method = RequestMethod.GET)
+	public String editBoard(@PathVariable("id") int id,
+			Map<String, Object> model) {
+		model.put("board", this.boardService.findBoardById(id));
+		return "board/boardUpdate";
+	}
+
+	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.POST)
+	public String editBoardProc(@PathVariable("id") int id,
+			@PathVariable int bbsId, @Valid Board board, BindingResult result,
+			Map<String, Object> model, SessionStatus status,
+			HttpServletRequest request) {
+
+		if (result.hasErrors()) {
+			return "board/createOrUpdateBoardForm";
+		} else {
+			Login logininfo = (Login) request.getSession().getAttribute(
+					"loginInfo");
+			int userId = 1;
+			if (!StringUtils.isEmpty(logininfo)) {
+				userId = logininfo.getUserInfo().getId();
+			}
+			board.setBbsId(bbsId);
+			board.setId(id);
+			board.setUpdtId(userId);
+			this.boardService.saveBoard(board);
+			status.setComplete();
+			return "redirect:/bbs/{id}";
+		}
+
 	}
 
 }
