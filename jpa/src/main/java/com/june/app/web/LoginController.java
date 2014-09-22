@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.june.app.model.Login;
+
 @Controller
 public class LoginController {
 
@@ -27,8 +29,15 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(Model model,
-			@RequestParam(value = "fail", required = false, defaultValue="0") String fail) {
+	public String getLoginPage(
+			Model model,
+			@RequestParam(value = "fail", required = false, defaultValue = "0") String fail,
+			HttpServletRequest request) {
+		Login logininfo = (Login) request.getSession()
+				.getAttribute("loginInfo");
+		if(logininfo != null){
+			return "redirect:/main";
+		}
 		model.addAttribute("fail", fail);
 		return "login/login";
 	}

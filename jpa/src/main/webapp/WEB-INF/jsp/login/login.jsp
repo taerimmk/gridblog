@@ -81,8 +81,7 @@
 										<!-- <h3 id="reply-title" class="comment-reply-title">로 그 인</h3> -->
 										<form action="<c:url value='j_spring_security_check'/>"
 											method="POST" class="comment-form">
-											<p class="comment-notes">
-											</p>
+											<p class="comment-notes"></p>
 											<p class="comment-form-author">
 												<label for="nttSj">아이디 <span class="required">*</span>
 												</label> <input id="j_username" name="j_username" value="" size="50"
@@ -105,8 +104,8 @@
 													type="button" /></a>
 											</p>
 											<p class="form-submit">
-												<a href="/register/registerUser"><input class="cmnbtn" value="회원가입"
-													type="button" /></a>
+												<a href="/register/registerUser"><input class="cmnbtn"
+													value="회원가입" type="button" /></a>
 											</p>
 										</form>
 									</div>
@@ -132,12 +131,12 @@
 	<!--end entiresite wrap-->
 
 	<jsp:include page="../inc/footerTag.jsp" />
-	<c:if test="${'1' eq fail}" >
-	<script type="text/javascript">
-		$(function() {
-			alert("비밀번호를 확인해주세요.");
-		});
-	</script>
+	<c:if test="${'1' eq fail}">
+		<script type="text/javascript">
+			$(function() {
+				alert("비밀번호를 확인해주세요.");
+			});
+		</script>
 	</c:if>
 </body>
 </html>
