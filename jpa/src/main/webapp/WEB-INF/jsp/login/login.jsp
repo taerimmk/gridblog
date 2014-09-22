@@ -135,7 +135,7 @@
 	<c:if test="${'1' eq fail}" >
 	<script type="text/javascript">
 		$(function() {
-			alert("비밀번호를 확인해주세요.")
+			alert("비밀번호를 확인해주세요.");
 		});
 	</script>
 	</c:if>
