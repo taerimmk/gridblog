@@ -12,10 +12,11 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
-		<intercept-url pattern="/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/bbs/**" access="ROLE_ADMIN" />
 		<form-login login-page="/login" default-target-url="/main"
 			authentication-failure-url="/login?fail=1" always-use-default-target="false"
 			authentication-success-handler-ref="loginSuccessHandler" 
+			
 			/>
 
 		<logout logout-success-url="/login" invalidate-session="true"
