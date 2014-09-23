@@ -78,7 +78,7 @@
 
 
 									<div id="respond" class="comment-respond">
-										<h3 id="reply-title" class="comment-reply-title">해당페이지 권한이 없습니다.(${exception.message})</h3>
+										<h3 id="reply-title" class="comment-reply-title">데이터가 없습니다.(${exception.message})</h3>
 										
 									</div>
 									<!-- #respond -->
