@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -75,7 +74,7 @@ public class BoardController extends CommonController {
 	/**
 	 * 게시물 등록화면으로 이동
 	 */
-	//@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/bbs/{bbsId}/new", method = RequestMethod.GET)
 	public String insertForm(Locale locale, @PathVariable int bbsId,
 			Map<String, Object> model) {
@@ -91,7 +90,7 @@ public class BoardController extends CommonController {
 	/**
 	 * 게시물 등록
 	 */
-	//@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/bbs/{bbsId}/new", method = RequestMethod.POST)
 	public String insertProc(Locale locale, @PathVariable int bbsId,
 			@Valid Board board, BindingResult result, SessionStatus status,
@@ -131,6 +130,7 @@ public class BoardController extends CommonController {
 	 * 게시물 수정
 	 */
 	//@PreAuthorize("isAuthenticated()")
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.GET)
 	public String editBoard(@PathVariable("id") int id,
 			@PathVariable("bbsId") int bbsId, Model model) {
@@ -142,7 +142,7 @@ public class BoardController extends CommonController {
 		return "board/createOrUpdateBoardForm";
 	}
 	
-	//@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.PUT)
 	public String editBoardProc(@PathVariable("id") int id,
 			@PathVariable int bbsId, @Valid Board board, BindingResult result,
