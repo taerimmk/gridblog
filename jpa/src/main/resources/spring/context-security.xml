@@ -10,14 +10,22 @@
 	<http pattern="/register/**" security="none" />
 	<http pattern="/resources/**" security="none" />
 
-	<http auto-config="true">
+	<http auto-config="true" use-expressions="true">
+		<!-- <intercept-url pattern="/login" access="permitAll" /> -->
+		<!-- <intercept-url pattern="/login*" access="permitAll" /> -->
 		<intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
-		<intercept-url pattern="/bbs/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/bbs/**/edit" access="isAuthenticated()" />
+		<intercept-url pattern="/bbs/**/new" access="isAuthenticated()" />
+		<!-- <intercept-url pattern="/login" access="permitAll" /> <intercept-url 
+			pattern="/logout" access="permitAll" /> <intercept-url pattern="/register/**" 
+			access="permitAll" /> <intercept-url pattern="/resources/**" access="permitAll" 
+			/> -->
+		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" /> -->
+
+		<!-- <intercept-url pattern="/bbs/**" access="ROLE_ADMIN" /> -->
 		<form-login login-page="/login" default-target-url="/main"
 			authentication-failure-url="/login?fail=1" always-use-default-target="false"
-			authentication-success-handler-ref="loginSuccessHandler" 
-			
-			/>
+			authentication-success-handler-ref="loginSuccessHandler" />
 
 		<logout logout-success-url="/login" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
@@ -26,6 +34,17 @@
 
 
 	</http>
+	<!-- hasRole([role]) Returns true if the current principal has the specified 
+		role. hasAnyRole([role1,role2]) Returns true if the current principal has 
+		any of the supplied roles (given as a comma-separated list of strings) principal 
+		Allows direct access to the principal object representing the current user 
+		authentication Allows direct access to the current Authentication object 
+		obtained from the SecurityContext permitAll Always evaluates to true denyAll 
+		Always evaluates to false isAnonymous() Returns true if the current principal 
+		is an anonymous user isRememberMe() Returns true if the current principal 
+		is a remember-me user isAuthenticated() Returns true if the user is not anonymous 
+		isFullyAuthenticated() Returns true if the user is not an anonymous or a 
+		remember-me user -->
 
 	<beans:bean name="bcryptEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
