@@ -116,7 +116,8 @@ public class BoardController extends CommonController {
 	 * 게시물 상세
 	 */
 	@RequestMapping(value = "/bbs/{bbsId}/{id}")
-	public ModelAndView showBoard(@PathVariable("id") int id) {
+	public ModelAndView showBoard(@PathVariable("id") int id,
+			@PathVariable("bbsId") int bbsId) {
 		ModelAndView mav = new ModelAndView("board/boardDetail");
 		mav.addObject(this.boardService.findBoardById(id));
 		return mav;

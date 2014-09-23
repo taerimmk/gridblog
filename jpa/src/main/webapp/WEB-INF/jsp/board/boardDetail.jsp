@@ -161,7 +161,7 @@
 									<!--end row-->
 									<!-- You can start editing here. -->
 									<!-- If comments are open, but there are no comments. -->
-									<div id="respond" class="comment-respond">
+									<%-- <div id="respond" class="comment-respond">
 										<h3 id="reply-title" class="comment-reply-title">
 											Leave a Reply <small><a rel="nofollow"
 												id="cancel-comment-reply-link"
@@ -221,7 +221,7 @@
 												<input type="hidden" id="ak_js" name="ak_js" value="224" />
 											</p>
 										</form>
-									</div>
+									</div> --%>
 									<!-- #respond -->
 								</div>
 							</div>

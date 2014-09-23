@@ -50,6 +50,11 @@
 					key="org.springframework.web.multipart.MaxUploadSizeExceededException">
 					cmn/exception/imgUploadErr
 				</prop>
+				<prop
+					key="org.springframework.dao.EmptyResultDataAccessException">
+					cmn/exception/emptyResul
+				</prop>
+				
 				<!-- <beans:prop key="java.lang.Exception">error/exception_error</beans:prop> -->
 			</props>
 		</property>

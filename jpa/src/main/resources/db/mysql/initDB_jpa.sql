@@ -39,7 +39,7 @@ ATCH_FILE_ID varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into USER (USER_ID, name, email, status, PASSWORD)
-values ('admin','관리자','admin@nokpon.co.kr','A', '1');
+values ('admin','관리자','admin@nokpon.co.kr','A', '$2a$10$n0fYvdchqL3G0SymPIOvpewH5dCgzFz6Xq47TSOK/GUr76INR0sne');
 
 
 insert into NOK_USER (id, name, email, status,unique_id)

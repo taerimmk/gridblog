@@ -33,8 +33,7 @@
 						<div class="row">
 
 							<div class="col-md-9">
-								<h1 class="nomargin lh-40">게시물 등록 : ${board['new']} :
-									${method }</h1>
+								<h1 class="nomargin lh-40">게시물 등록/수정</h1>
 							</div>
 							<!--end 9 col-->
 
@@ -91,7 +90,6 @@
 												<c:set var="method" value="put" />
 											</c:otherwise>
 										</c:choose>
-MM : ${method}
 										<%-- <form:form action="/bbs/${bbsMst.id}/new" method="${method}" --%>
 										<form:form modelAttribute="board" method="${method}" id="commentform" cssClass="comment-form">
 											<p class="comment-notes">

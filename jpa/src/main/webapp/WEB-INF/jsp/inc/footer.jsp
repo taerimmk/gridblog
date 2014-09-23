@@ -23,7 +23,7 @@
 			</div>
 			<!--end onefourth-->
 
-			<div class="col-md-3">
+			<!-- <div class="col-md-3">
 				<div class="widget-area-footer">
 					<div class="footer-widget-pads">
 						<div id="infinitygrid_recent_posts-2"
@@ -91,8 +91,8 @@
 						</div>
 					</div>
 				</div>
-				<!--end widget-area-footer -->
-			</div>
+				end widget-area-footer
+			</div> -->
 			<!--end onefourth-->
 
 			<div class="col-md-3">
@@ -151,7 +151,7 @@
 			</div>
 			<!--end onefourth-->
 
-			<div class="col-md-3">
+			<!-- <div class="col-md-3">
 				<div class="widget-area-footer">
 					<div class="footer-widget-pads">
 						<div id="recent-posts-2"
@@ -177,8 +177,8 @@
 						</div>
 					</div>
 				</div>
-				<!--end widget-area-footer -->
-			</div>
+				end widget-area-footer
+			</div> -->
 			<!--end onefourth-->
 		</div>
 		<!--end this row-->
@@ -195,52 +195,20 @@
 				<div class="col-md-6">
 					<div class="social-icons">
 						<ul>
-
 							<li><a href="#" title="Subscribe"><span
 									class="rss_social socializeme"></span></a></li>
-
-
 							<li><a href="#" title="Facebook"><span
 									class="facebook_social socializeme"></span></a></li>
-
-
-
-
 							<li><a href="#" title="behance"><span
 									class="behance_social socializeme"></span></a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
 							<li><a href="#" title="twitter"><span
 									class="twitter_social socializeme"></span></a></li>
-
-
 							<li><a href="#" title="dribbble"><span
 									class="dribbble_social socializeme"></span></a></li>
-
-
-
-
-
 							<li><a href="#" title="googleplus"><span
 									class="google_social socializeme"></span></a></li>
-
-
-
 							<li><a href="#" title="instagram"><span
 									class="instagram_social socializeme"></span></a></li>
-
-
 							<li><a href="#" title="pinterest"><span
 									class="pinterest_social socializeme"></span></a></li>
 
