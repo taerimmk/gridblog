@@ -5,14 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:choose>
-	<c:when test="${board['new']}">
-		<c:set var="method" value="post" />
-	</c:when>
-	<c:otherwise>
-		<c:set var="method" value="put" />
-	</c:otherwise>
-</c:choose>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -41,20 +33,21 @@
 						<div class="row">
 
 							<div class="col-md-9">
-								<h1 class="nomargin lh-40">게시물 등록</h1>
+								<h1 class="nomargin lh-40">게시물 등록 : ${board['new']} :
+									${method }</h1>
 							</div>
 							<!--end 9 col-->
 
 							<div class="col-md-3">
-								<form method="get" id="searchForm"
-									action="http://aonethemes.com/infinitygrid/">
-									<div class="search-wrapper">
-										<div class="search-icon"></div>
-										<input type="text" maxlength="30" name="s" id="s"
-											class="search_input" /> <input type="submit"
-											id="searchSubmit" />
-									</div>
-								</form>
+								<%-- <form method="get" id="searchForm" --%>
+								<!-- action="http://aonethemes.com/infinitygrid/"> -->
+								<div class="search-wrapper">
+									<div class="search-icon"></div>
+									<input type="text" maxlength="30" name="s" id="s"
+										class="search_input" /> <input type="submit"
+										id="searchSubmit" />
+								</div>
+								<%-- </form> --%>
 							</div>
 							<!--end 3col-->
 
@@ -90,9 +83,17 @@
 
 									<div id="respond" class="comment-respond">
 										<h3 id="reply-title" class="comment-reply-title">게시물 입력</h3>
-										<form:form action="/bbs/${bbsMst.id}/new" method="${method}"
-											modelAttribute="board" id="commentform"
-											cssClass="comment-form">
+										<c:choose>
+											<c:when test="${board['new']}">
+												<c:set var="method" value="post" />
+											</c:when>
+											<c:otherwise>
+												<c:set var="method" value="put" />
+											</c:otherwise>
+										</c:choose>
+MM : ${method}
+										<%-- <form:form action="/bbs/${bbsMst.id}/new" method="${method}" --%>
+										<form:form modelAttribute="board" method="${method}" id="commentform" cssClass="comment-form">
 											<p class="comment-notes">
 												Your email address will not be published. Required fields
 												are marked <span class="required">*</span>
@@ -125,7 +126,8 @@
 											<%-- </c:if> --%>
 
 											<p class="comment-form-comment">
-												<label for="nttCn">내용 <span class="required">*</span><form:errors path="nttCn" /></label>
+												<label for="nttCn">내용 <span class="required">*</span>
+												<form:errors path="nttCn" /></label>
 											</p>
 											<p class="comment-form-comment">
 												<%-- <label for="nttCn">내용 <span class="required">*</span>
@@ -148,8 +150,8 @@
 													value="등록하기" />
 											</p>
 											<p class="form-submit">
-												<a href="/bbs/${bbsId}/list"><input class="cmnbtn"
-													id="goList" value="취소" type="button" /></a>
+												<a href="/bbs/${board.bbsId}/list/${board.pageIndex}"><input
+													class="cmnbtn" id="goList" value="취소" type="button" /></a>
 											</p>
 										</form:form>
 									</div>

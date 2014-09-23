@@ -151,7 +151,7 @@
 
 											<div class="col-xs-6 text-right">
 												<a
-													href="http://aonethemes.com/infinitygrid/too-many-hours-of-gaming/"
+													href="/bbs/${board.bbsId}/${board.id}/edit"
 													rel="next">수정하기</a> &rarr;
 											</div>
 										</div>

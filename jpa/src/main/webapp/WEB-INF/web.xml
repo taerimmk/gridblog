@@ -44,7 +44,7 @@
 	</servlet-mapping>
 
 
-	<!-- <filter>
+	<filter>
 		<filter-name>httpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
 	</filter>
@@ -52,7 +52,7 @@
 	<filter-mapping>
 		<filter-name>httpMethodFilter</filter-name>
 		<servlet-name>appServlet</servlet-name>
-	</filter-mapping> -->
+	</filter-mapping>
 
 	<!-- used to provide the ability to enter Chinese characters inside the 
 		Owner Form -->

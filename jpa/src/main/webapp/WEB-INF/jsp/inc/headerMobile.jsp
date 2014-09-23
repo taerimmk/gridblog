@@ -21,10 +21,6 @@
 						<li id="menu-item-168"
 							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-168"><a
 							href="/bbs/2/list/1">설교말씀</a></li>
-						<li id="menu-item-167"
-							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a
-							href="http://aonethemes.com/infinitygrid/single-page-left-sidebar/">Left
-								sidebar</a></li>
 					</ul></li>
 				<li id="menu-item-38"
 					class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-38"><a

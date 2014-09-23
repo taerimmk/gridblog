@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void saveBoard(Board board) throws DataAccessException {
         boardRepository.saveBoard(board);
     }

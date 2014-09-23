@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -124,22 +125,26 @@ public class BoardController extends CommonController {
 	/**
 	 * 게시물 수정
 	 */
-	@RequestMapping(value = "/bbs/*/{id}/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.GET)
 	public String editBoard(@PathVariable("id") int id,
-			Map<String, Object> model) {
-		model.put("board", this.boardService.findBoardById(id));
-		return "board/boardUpdate";
+			@PathVariable("bbsId") int bbsId, Model model) {
+		BoardMaster bbsMst = boardMasterService.getboardMaster(bbsId);
+		Board board = this.boardService.findBoardById(id);
+		logger.info("========] board [===== {}", board.isNew());
+		model.addAttribute(board);
+		model.addAttribute(bbsMst);
+		return "board/createOrUpdateBoardForm";
 	}
 
-	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/bbs/{bbsId}/{id}/edit", method = RequestMethod.PUT)
 	public String editBoardProc(@PathVariable("id") int id,
 			@PathVariable int bbsId, @Valid Board board, BindingResult result,
-			Map<String, Object> model, SessionStatus status,
-			HttpServletRequest request) {
+			SessionStatus status, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "board/createOrUpdateBoardForm";
 		} else {
+
 			Login logininfo = (Login) request.getSession().getAttribute(
 					"loginInfo");
 			int userId = 1;
@@ -151,7 +156,7 @@ public class BoardController extends CommonController {
 			board.setUpdtId(userId);
 			this.boardService.saveBoard(board);
 			status.setComplete();
-			return "redirect:/bbs/{id}";
+			return "redirect:/bbs/{bbsId}/{id}";
 		}
 
 	}

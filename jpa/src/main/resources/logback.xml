@@ -14,10 +14,10 @@
         </encoder>
     </appender>
 
-	<logger name="org.hibernate" level="debug"/>
-    <logger name="com.june.app" level="debug"/>
+	<logger name="org.hibernate" level="info"/>
+    <logger name="com.june.app" level="info"/>
          
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="console"/>
     </root>
 </configuration>
